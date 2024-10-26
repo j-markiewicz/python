@@ -58,7 +58,15 @@ Jeśli ta linia kodu powinna stworzyć listę zawierającą liczby podniesione d
 
 ## Zadania 3 - 6, 8 - 10
 
-Rozwiązania tych zadań znajdują się w pliku [`main.py`](./main.py).
+Rozwiązania tych zadań znajdują się w pliku [`main.py`](./main.py):
+
+- `3.3` w funkcji [`print_numbers`](./main.py#L4-L11)
+- `3.4` w funkcji [`pow_3`](./main.py#L14-L31)
+- `3.5` w funkcji [`measuring_tape`](./main.py#L34-L46)
+- `3.6` w funkcji [`rectangle`](./main.py#L49-L63)
+- `3.8` w funkcji [`combine_sequences`](./main.py#L66-L105)
+- `3.9` w funkcji [`sum_sequences`](./main.py#L108-L115)
+- `3.10` w funkcji [`roman2int`](./main.py#L118-L237)
 
 Testy do rozwiązań są w pliku [`tests.py`](./tests.py).
 Można je wykonać z flagą `-v` aby dostać dodatkowe informacje o ich przebiegu.
