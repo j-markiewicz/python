@@ -12,6 +12,7 @@
 | [`6`][6] |                  [`6.2`][6.2], [`6.5`][6.5] |                                                  - |
 | [`7`][7] |                  [`7.3`][7.3], [`7.6`][7.6] |                                                  - |
 | [`8`][8] |                                [`8.1`][8.1] |                Testy z `pytest` zamiast `unittest` |
+| [`9`][9] |                         [`9.1`, `9.2`][9.*] | Dwie gry (*PADAJĄCY ŚNIEG* i *PING PONG*) w jednej |
 
 [1]: ./1/README.md
 [1.1a]: ./1/1a.png
@@ -40,3 +41,6 @@
 
 [8]: ./8/README.md
 [8.1]: ./8/rectangles.py
+
+[9]: ./9/README.md
+[9.*]: ./9/game.py
