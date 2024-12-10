@@ -14,33 +14,33 @@
 | [`8`][8] |                                [`8.1`][8.1] |                Testy z `pytest` zamiast `unittest` |
 | [`9`][9] |                         [`9.1`, `9.2`][9.*] | Dwie gry (*PADAJĄCY ŚNIEG* i *PING PONG*) w jednej |
 
-[1]: ./1/README.md
-[1.1a]: ./1/1a.png
-[1.1b]: ./1/1b.png
-[1.2]: ./1/2.png
+[1]: ./01/README.md
+[1.1a]: ./01/1a.png
+[1.1b]: ./01/1b.png
+[1.2]: ./01/2.png
 
-[2]: ./2/README.md
-[2.*]: ./2/main.py
+[2]: ./02/README.md
+[2.*]: ./02/main.py
 
-[3]: ./3/README.md
-[3.*]: ./3/main.py
+[3]: ./03/README.md
+[3.*]: ./03/main.py
 
-[4]: ./4/README.md
-[4.*]: ./4/main.py
+[4]: ./04/README.md
+[4.*]: ./04/main.py
 
-[5]: ./5/README.md
-[5.2]: ./5/fracs.py
+[5]: ./05/README.md
+[5.2]: ./05/fracs.py
 
-[6]: ./6/README.md
-[6.2]: ./6/points.py
-[6.5]: ./6/fracs.py
+[6]: ./06/README.md
+[6.2]: ./06/points.py
+[6.5]: ./06/fracs.py
 
-[7]: ./7/README.md
-[7.3]: ./7/rectangles.py
-[7.6]: ./7/iter.py
+[7]: ./07/README.md
+[7.3]: ./07/rectangles.py
+[7.6]: ./07/iter.py
 
-[8]: ./8/README.md
-[8.1]: ./8/rectangles.py
+[8]: ./08/README.md
+[8.1]: ./08/rectangles.py
 
-[9]: ./9/README.md
-[9.*]: ./9/game.py
+[9]: ./09/README.md
+[9.*]: ./09/game.py
