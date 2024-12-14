@@ -102,53 +102,53 @@ dt = 0.0
 
 while True:
     for event in pygame.event.get():
-        match event.type:
-            case pygame.QUIT:
-                sys.exit()
-            case pygame.KEYDOWN:
-                match event.key:
-                    case pygame.K_SPACE if state != "playing":
-                        snow = [] if snow is not None else None
-                        points = [0, 0]
-                        left_paddle_y = center()[1]
-                        right_paddle_y = center()[1]
-                        ball_x = center()[0]
-                        ball_y = center()[1]
-                        ball_vx = float(BALL_INITIAL_SPEED)
-                        ball_vy = float(
-                            random.randint(
-                                -BALL_INITIAL_SPEED,
-                                BALL_INITIAL_SPEED,
-                            )
-                        )
-                        state = "playing"
-                    case pygame.K_ESCAPE if state != "playing":
-                        sys.exit()
-                    case pygame.K_ESCAPE:
-                        state = "end"
-            case (
-                pygame.MOUSEBUTTONDOWN
-            ) if event.button == 1 and snow is not None:
-                clicked = []
-                for i, flake in enumerate(snow):
-                    if dist(flake, event.pos) <= SNOW_SIZE / 2:
-                        clicked.append(i)
-
-                for i in reversed(clicked):
-                    snow.pop(i)
-            case event if event == SNOW_ADD_EVENT:
-                snow.append(
-                    [
-                        float(
-                            random.randint(
-                                MARGIN + PADDLE_WIDTH + SNOW_SIZE,
-                                pygame.display.get_window_size()[0]
-                                - (MARGIN + PADDLE_WIDTH + SNOW_SIZE),
-                            )
-                        ),
-                        0,
-                    ]
+        if event.type == pygame.QUIT:
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and state != "playing":
+                snow = [] if snow is not None else None
+                points = [0, 0]
+                left_paddle_y = center()[1]
+                right_paddle_y = center()[1]
+                ball_x = center()[0]
+                ball_y = center()[1]
+                ball_vx = float(BALL_INITIAL_SPEED)
+                ball_vy = float(
+                    random.randint(
+                        -BALL_INITIAL_SPEED,
+                        BALL_INITIAL_SPEED,
+                    )
                 )
+                state = "playing"
+            elif event.key == pygame.K_ESCAPE and state != "playing":
+                sys.exit()
+            elif event.key == pygame.K_ESCAPE:
+                state = "end"
+        elif (
+            event.type == (pygame.MOUSEBUTTONDOWN)
+            and event.button == 1
+            and snow is not None
+        ):
+            clicked = []
+            for i, flake in enumerate(snow):
+                if dist(flake, event.pos) <= SNOW_SIZE / 2:
+                    clicked.append(i)
+
+            for i in reversed(clicked):
+                snow.pop(i)
+        elif event.type == SNOW_ADD_EVENT:
+            snow.append(
+                [
+                    float(
+                        random.randint(
+                            MARGIN + PADDLE_WIDTH + SNOW_SIZE,
+                            pygame.display.get_window_size()[0]
+                            - (MARGIN + PADDLE_WIDTH + SNOW_SIZE),
+                        )
+                    ),
+                    0,
+                ]
+            )
 
     right_paddle_y += (
         sign(ball_y - right_paddle_y) * PADDLE_AUTO_SPEED[difficulty] * dt
@@ -237,87 +237,86 @@ while True:
     for i in reversed(to_remove):
         snow.pop(i)
 
-    match state:
-        case "start":
-            text = font.render("Press [space] to start.", True, WHITE)
-            screen.blit(text, center(text.get_size()))
-        case "playing":
-            screen.blits(
-                map(
-                    lambda flake: (
-                        snow_icon,
-                        (flake[0] - SNOW_SIZE // 2, flake[1] - SNOW_SIZE // 2),
-                    ),
-                    snow if snow is not None else [],
+    if state == "start":
+        text = font.render("Press [space] to start.", True, WHITE)
+        screen.blit(text, center(text.get_size()))
+    elif state == "playing":
+        screen.blits(
+            map(
+                lambda flake: (
+                    snow_icon,
+                    (flake[0] - SNOW_SIZE // 2, flake[1] - SNOW_SIZE // 2),
                 ),
-                0,
-            )
+                snow if snow is not None else [],
+            ),
+            0,
+        )
 
-            pygame.draw.rect(
-                screen,
-                WHITE,
-                pygame.Rect(
-                    MARGIN,
-                    left_paddle_y - PADDLE_HEIGHT / 2,
-                    PADDLE_WIDTH,
-                    PADDLE_HEIGHT,
-                ),
-            )
+        pygame.draw.rect(
+            screen,
+            WHITE,
+            pygame.Rect(
+                MARGIN,
+                left_paddle_y - PADDLE_HEIGHT / 2,
+                PADDLE_WIDTH,
+                PADDLE_HEIGHT,
+            ),
+        )
 
-            pygame.draw.rect(
-                screen,
-                WHITE,
-                pygame.Rect(
-                    pygame.display.get_window_size()[0] - PADDLE_WIDTH - MARGIN,
-                    right_paddle_y - PADDLE_HEIGHT / 2,
-                    PADDLE_WIDTH,
-                    PADDLE_HEIGHT,
-                ),
-            )
+        pygame.draw.rect(
+            screen,
+            WHITE,
+            pygame.Rect(
+                pygame.display.get_window_size()[0] - PADDLE_WIDTH - MARGIN,
+                right_paddle_y - PADDLE_HEIGHT / 2,
+                PADDLE_WIDTH,
+                PADDLE_HEIGHT,
+            ),
+        )
 
-            pygame.draw.circle(
-                screen,
-                WHITE,
-                (ball_x, ball_y),
-                BALL_RADIUS,
-            )
+        pygame.draw.circle(
+            screen,
+            WHITE,
+            (ball_x, ball_y),
+            BALL_RADIUS,
+        )
 
-            left_paddle_y = clamp(
-                left_paddle_y,
-                PADDLE_HEIGHT / 2,
-                pygame.display.get_window_size()[1] - PADDLE_HEIGHT / 2,
-            )
+        left_paddle_y = clamp(
+            left_paddle_y,
+            PADDLE_HEIGHT / 2,
+            pygame.display.get_window_size()[1] - PADDLE_HEIGHT / 2,
+        )
 
-            right_paddle_y = clamp(
-                right_paddle_y,
-                PADDLE_HEIGHT / 2,
-                pygame.display.get_window_size()[1] - PADDLE_HEIGHT / 2,
-            )
+        right_paddle_y = clamp(
+            right_paddle_y,
+            PADDLE_HEIGHT / 2,
+            pygame.display.get_window_size()[1] - PADDLE_HEIGHT / 2,
+        )
 
-            text = font.render(f"{points[0]} : {points[1]}", True, WHITE)
-            screen.blit(
-                text,
-                center(
-                    (
-                        text.get_size()[0],
-                        pygame.display.get_window_size()[1] - 2 * MARGIN,
-                    )
-                ),
-            )
-        case "end":
-            text = font.render(
-                f"{'Left' if points[0] > points[1] else 'Right' if points[0] < points[1] else 'No'} player won!",
-                True,
-                WHITE,
-            )
-            screen.blit(text, center((text.get_size()[0], 32)))
+        text = font.render(f"{points[0]} : {points[1]}", True, WHITE)
+        screen.blit(
+            text,
+            center(
+                (
+                    text.get_size()[0],
+                    pygame.display.get_window_size()[1] - 2 * MARGIN,
+                )
+            ),
+        )
+    elif state == "end":
+        text = font.render(
+            f"{'Left' if points[0] > points[1] else 'Right' if points[0] < points[1] else 'No'} player won!",
+            True,
+            WHITE,
+        )
+        screen.blit(text, center((text.get_size()[0], 32)))
 
-            text = font.render(
-                "Press [space] to play again.",
-                True,
-                WHITE,
-            )
-            screen.blit(text, center((text.get_size()[0], -32)))
+        text = font.render(
+            "Press [space] to play again.",
+            True,
+            WHITE,
+        )
+        screen.blit(text, center((text.get_size()[0], -32)))
 
     if any(map(lambda p: p >= POINT_GOAL, points)):
         state = "end"
