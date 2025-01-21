@@ -33,6 +33,22 @@ if len(args.input) == 0:
     # Pre-initialize dictionary
     t9([], args.language)
 
+    print(
+        """
+           1         2         3
+        ,.!?'-1   abcąć2     defę3
+
+           4         5         6
+         ghi4      jklł5    mnońó6
+
+           7         8         9
+        pqrsś7     tuv8     wxyzżź90
+
+           *         0         #
+
+    """
+    )
+
     while True:
         try:
             chars = input("> ")
