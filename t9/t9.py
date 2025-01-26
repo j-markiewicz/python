@@ -1,4 +1,4 @@
-from t9 import Language, Character, t9
+from t9 import Language, Character, decode
 import argparse
 
 
@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 if len(args.input) == 0:
     # Pre-initialize dictionary
-    t9([], args.language)
+    decode([], args.language)
 
     print(
         """
@@ -53,7 +53,7 @@ if len(args.input) == 0:
         try:
             chars = input("> ")
             chars = list(map(lambda c: Character.from_input(c), chars))
-            print(", ".join(t9(chars, args.language, args.n)))
+            print(", ".join(decode(chars, args.language, args.n)))
         except ValueError:
             print("Invalid input - use digits 1-9 only")
         except KeyboardInterrupt:
@@ -61,4 +61,4 @@ if len(args.input) == 0:
 else:
     for chars in args.input:
         chars = list(map(lambda c: Character.from_input(c), chars))
-        print(", ".join(t9(chars, args.language, args.n)))
+        print(", ".join(decode(chars, args.language, args.n)))

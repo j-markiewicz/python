@@ -13,15 +13,15 @@ Projekt jest podzielony na dwie części:
 
 ## Implementacja
 
-### `t9()`
+### `decode()`
 
-Funkcja `t9` zwraca *n* najlepiej pasujące słowa dla podanago wejścia w podanym języku (lub dla podanego słownika) dla metody wejścia [*T9*](https://en.wikipedia.org/wiki/T9_(predictive_text)).
+Funkcja `decode` zwraca *n* najlepiej pasujące słowa dla podanago wejścia w podanym języku (lub dla podanego słownika) dla metody wejścia [*T9*](https://en.wikipedia.org/wiki/T9_(predictive_text)).
 Zwrócone słowa są najbardziej popularnymi słowami odpowiadającymi wejściu użytkownika ze słownika.
 
-Implementacja (znajdująca się w pliku `t9/__init__.py`) działa w następujący sposób, bazując na mapie słów:
+Implementacja (znajdująca się w pliku `t9/t9.py`) działa w następujący sposób, bazując na mapie słów:
 
 - ```py
-    def t9(
+    def decode(
         input: Sequence[Character], lang_or_wordmap: Language | WordMap, n: int = 3
     ) -> tuple[str]:
     ```
@@ -59,7 +59,7 @@ Implementacja (znajdująca się w pliku `t9/__init__.py`) działa w następując
 
 ### Mapa słów
 
-Dla słowników w funkcji `t9` została użyta klasa `WordMap`, która zawiera słowa posortowane według popularności i skategoryzowane według klawiszy T9.
+Dla słowników w funkcji `decode` została użyta klasa `WordMap`, która zawiera słowa posortowane według popularności i skategoryzowane według klawiszy T9.
 
 Klasa `WordMap` implementuje dziewięciorzędne drzewo *trie* i jest zdefiniowana jak poniżej:
 
@@ -118,11 +118,12 @@ Cała mapa słów wraz z podmapami jest tworzona przez metodę statyczną `new` 
 ## Wykonanie i testowanie
 
 Program można wykonać interaktywnie (`python t9.py [--language {EN, PL}] [-n N]`) lub nie (`python t9.py [--language {EN, PL}] [-n N] INPUT...`), n.p. `python t9.py --language EN -n 1 43556` (co powinno wypisać słowo *hello*).
+W trybie interaktywnym, program można zakończyć przy użyciu <kbd>CTRL</kbd>+<kbd>C</kbd>.
 
 Kod również można użyć jako bibliotekę: `import t9`.
 Przykładem użycia jest program w [`t9.py`](./t9.py).
 
-Bibliotekę można przetestować wykonując plik `__init__`: `python t9/__init__.py`.
+Bibliotekę można przetestować przy użyciu modułu `unittest`: `python -m unittest`.
 
 ## Listy słów
 
